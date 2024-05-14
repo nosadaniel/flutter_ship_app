@@ -35,8 +35,41 @@ dev_dependencies:
   riverpod_generator: 2.4.0
   custom_lint: 0.6.4
   riverpod_lint: 2.3.10
+  flutter_flavorizr: ^2.2.3
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
+
+
+flavorizr:
+  ide: "vscode"
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    
+  flavors:
+    dev:
+      app:
+        name: "Flutter Ship Dev"
+      android:
+        applicationId: "com.codewithandrea.flutter_ship_app.dev"
+      ios:
+        bundleId: "com.codewithandrea.flutterShipApp.dev"
+    
+    stg:
+      app:
+        name: "Flutter Ship Stg"
+      android:
+        applicationId: "com.codewithandrea.flutter_ship_app.stg"  
+      ios:
+        bundleId: "com.codewithandrea.flutterShipApp.stg"
+    
+    prod:
+      app:
+        name: "Flutter Ship"
+      android:
+        applicationId: "com.codewithandrea.flutter_ship_app"  
+      ios:
+        bundleId: "com.codewithandrea.flutterShipApp"

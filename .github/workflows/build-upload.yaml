@@ -18,22 +18,22 @@ jobs:
   setup:
     uses: ./.github/workflows/01-setup.yaml
 
-  build-android:
-    needs:
-      - setup
-    uses: ./.github/workflows/02-build-android.yaml
-    secrets: inherit
+  # build-android:
+  #   needs:
+  #     - setup
+  #   uses: ./.github/workflows/02-build-android.yaml
+  #   secrets: inherit
 
-  build-ios:
-    needs:
-      - setup
-    uses: ./.github/workflows/03-build-ios.yaml
-    secrets: inherit
+  # build-ios:
+  #   needs:
+  #     - setup
+  #   uses: ./.github/workflows/03-build-ios.yaml
+  #   secrets: inherit
 
-  upload-sentry:
-    needs:
-      - build-android
-      - build-ios
-    uses: ./.github/workflows/04-upload-sentry.yaml
-    secrets: inherit
+  # upload-sentry:
+  #   needs:
+  #     - build-android
+  #     - build-ios
+  #   uses: ./.github/workflows/04-upload-sentry.yaml
+  #   secrets: inherit
 

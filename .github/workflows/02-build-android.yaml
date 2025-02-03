@@ -10,6 +10,7 @@ jobs:
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
+    steps:
     # Generate all the files needed for Android code signing
     - name: Setup Android Keystore
       env:

@@ -6,9 +6,9 @@ jobs:
   build-android:
     runs-on: self-hosted
     timeout-minutes: 20
-    environment: ${{ github.event.inputs.environment || 'prod' }}
+    environment: ${{ github.event.inputs.environment || 'stg' }}
     env:
-      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'stg' }}
 
     steps:
     - name: Download build files

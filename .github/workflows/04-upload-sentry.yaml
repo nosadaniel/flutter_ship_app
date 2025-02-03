@@ -10,6 +10,6 @@ jobs:
     env:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
-  steps:
+    steps:
     - name: Upload Debug Symbols to Sentry
       run: dart run sentry_dart_plugin

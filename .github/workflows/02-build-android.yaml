@@ -11,6 +11,10 @@ jobs:
       DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
 
     steps:
+    - name: Download build files
+      uses: actions/download-artifact@v4
+      with:
+        name: build-files    
     # Generate all the files needed for Android code signing
     - name: Setup Android Keystore
       env:

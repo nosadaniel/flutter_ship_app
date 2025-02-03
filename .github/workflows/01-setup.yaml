@@ -45,3 +45,15 @@ jobs:
         echo "$FIREBASE_JSON" | base64 --decode > firebase.json
         # Needed by the "flutterfire bundle-service-file" build phase in Xcode
         dart pub global activate flutterfire_cli 1.0.1 --overwrite
+
+    - name: Upload build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: |
+          .env.${{ env.DEPLOY_ENV }}
+          lib/firebase_options_${{ env.DEPLOY_ENV }}.dart
+          android/app/src/${{ env.DEPLOY_ENV }}/google-services.json
+          ios/flavors/${{ env.DEPLOY_ENV }}/GoogleService-Info.plist
+          firebase.json
+          

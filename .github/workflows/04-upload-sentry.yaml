@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 jobs:
-  build:
+  upload-sentry:
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}

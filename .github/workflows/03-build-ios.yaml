@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 jobs:
-  build:
+  build-ios:
     runs-on: self-hosted
     timeout-minutes: 20
     environment: ${{ github.event.inputs.environment || 'prod' }}

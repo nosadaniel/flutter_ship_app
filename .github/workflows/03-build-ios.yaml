@@ -1,0 +1,56 @@
+name: Build iOS
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+  build:
+    needs:
+      - setup
+    runs-on: self-hosted
+    timeout-minutes: 20
+    secrets: inherit
+    env:
+      APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+      CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+
+
+    # https://docs.codemagic.io/knowledge-codemagic/codemagic-cli-tools/
+    - name: Install Codemagic CLI tools
+      run: pip install codemagic-cli-tools
+
+    - name: Set up keychain
+      run: keychain initialize
+
+    - name: Fetch signing files
+      run: |
+        BUNDLE_ID=$(xcode-project detect-bundle-id)
+        if [ "${{ env.DEPLOY_ENV }}" != "prod" ]; then
+          BUNDLE_ID="${BUNDLE_ID}.${{ env.DEPLOY_ENV }}"
+        fi        
+        app-store-connect fetch-signing-files $BUNDLE_ID \
+          --type IOS_APP_STORE \
+          --create
+
+    - name: Set up signing certificate
+      run: keychain add-certificates
+
+    - name: Set up code signing settings on Xcode project
+      run: xcode-project use-profiles
+
+    - name: Build iOS App
+      run:
+        flutter build ipa --export-options-plist=$HOME/export_options.plist --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --obfuscate --split-debug-info=build
+
+    - name: Upload to App Store Connect
+      run: |
+        IPA_FILE=$(find build/ios/ipa -name "*.ipa")
+        app-store-connect publish --path "$IPA_FILE"

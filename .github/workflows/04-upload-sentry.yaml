@@ -1,0 +1,22 @@
+name: Upload to Sentry
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    timeout-minutes: 20
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    env:
+      DEPLOY_ENV: ${{ github.event.inputs.environment || 'prod' }}
+
+  upload-sentry:
+    needs:
+      - build-android
+      - build-ios
+    runs-on: self-hosted
+    timeout-minutes: 20
+    secrets: inherit
+
+    - name: Upload Debug Symbols to Sentry
+      run: dart run sentry_dart_plugin

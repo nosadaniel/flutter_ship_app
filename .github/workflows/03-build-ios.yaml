@@ -18,7 +18,7 @@ jobs:
     - name: Download build files
       uses: actions/download-artifact@v4
       with:
-        name: ${{ inputs.build_files_name }}
+        name: build-files
         
     # https://docs.codemagic.io/knowledge-codemagic/codemagic-cli-tools/
     - name: Install Codemagic CLI tools

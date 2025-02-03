@@ -14,7 +14,7 @@ jobs:
     - name: Download build files
       uses: actions/download-artifact@v4
       with:
-        name: ${{ inputs.build_files_name }}
+        name: build-files
 
     # Generate all the files needed for Android code signing
     - name: Setup Android Keystore

@@ -22,16 +22,12 @@ jobs:
     needs:
       - setup
     uses: ./.github/workflows/02-build-android.yaml
-    with:
-      build_files_name: ${{ needs.setup.outputs.build_files_name }}
     secrets: inherit
 
   build-ios:
     needs:
       - setup
     uses: ./.github/workflows/03-build-ios.yaml
-    with:
-      build_files_name: ${{ needs.setup.outputs.build_files_name }}
     secrets: inherit
 
   upload-sentry:

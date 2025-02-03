@@ -1,7 +1,10 @@
 name: Flutter App Setup
 on:
   workflow_call:
-
+    outputs:
+      build_files_name:
+        description: "Name of the artifact containing build files"
+        value: build-files
 jobs:
   setup:
     runs-on: self-hosted

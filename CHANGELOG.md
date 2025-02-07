@@ -1,3 +1,8 @@
+## 0.3.5
+
+- Update to latest packages
+- Move AppStartupWidget inside MaterialApp.builder
+
 ## 0.3.4
 
 - Improved web support in `flavor.dart`

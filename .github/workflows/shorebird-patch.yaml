@@ -89,7 +89,7 @@ jobs:
       id: shorebird-android-patch
       with:
         platform: android
-        args: --staging --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+        args: --flutter-version=3.27.4 --staging --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
 
     # https://docs.codemagic.io/knowledge-codemagic/codemagic-cli-tools/
     - name: Install Codemagic CLI tools
@@ -119,5 +119,5 @@ jobs:
       id: shorebird-ios-patch
       with:
         platform: ios
-        args: --staging --export-options-plist=$HOME/export_options.plist --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+        args: --flutter-version=3.27.4 --staging --export-options-plist=$HOME/export_options.plist --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
  

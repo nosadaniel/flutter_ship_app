@@ -93,7 +93,7 @@ jobs:
       id: shorebird-android-release
       with:
         platform: android
-        args: --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+        args: --flutter-version=3.27.4 --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
 
     - name: Prepare for Upload
       run: |
@@ -147,7 +147,7 @@ jobs:
       id: shorebird-ios-release
       with:
         platform: ios
-        args: --export-options-plist=$HOME/export_options.plist --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
+        args: --flutter-version=3.27.4 --export-options-plist=$HOME/export_options.plist --flavor ${{ env.DEPLOY_ENV }} -t lib/main_${{ env.DEPLOY_ENV }}.dart --dart-define-from-file=.env.${{ env.DEPLOY_ENV }} --split-debug-info=build
  
     - name: Upload to App Store Connect
       run: |
